@@ -116,28 +116,39 @@ function loadHome(){
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input id ='gia' type="text" class="form-control datetimepicker-input"
-                                            placeholder="Giá" data-target="#date1" data-toggle="datetimepicker" />
+                                <div class="col-md-2">
+                                 <div  data-target-input="nearest">
+                                        <input id ='minPrice' type="text" class="form-control datetimepicker-input" placeholder=" Giá Thấp" data-target="#date2" data-toggle="datetimepicker"/>
+                                    </div>
+                                   
+                                   
+                                </div>
+                                <div class="col-md-2">
+                                    <div  data-target-input="nearest">
+                                        <input id ='maxPrice' type="text" class="form-control datetimepicker-input" placeholder=" Giá Cao" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest">
-                                        <input id ='dientich' type="text" class="form-control datetimepicker-input" placeholder="Diện tích" data-target="#date2" data-toggle="datetimepicker"/>
+                                 <div class="col-md-2">
+                                    <div  data-target-input="nearest">
+                                        <input  id = 'mindt' type="text" class="form-control datetimepicker-input" placeholder="Diện tích nhỏ" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
-                                 <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest">
+                                 <div class="col-md-2">
+                                    <div data-target-input="nearest">
+                                        <input  id = 'maxdt' type="text" class="form-control datetimepicker-input" placeholder="Diện tích lớn" data-target="#date2" data-toggle="datetimepicker"/>
+                                    </div>
+                                </div>
+                                 <div class="col-md-2">
+                                    <div  data-target-input="nearest">
                                         <input  id = 'nameHome' type="text" class="form-control datetimepicker-input" placeholder="Tên Căn Hộ" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select class="form-select" id="diachi">
-                                        <option selected>Địa chỉ</option>
-                                        <option value="1">Hà Đông</option>
-                                        <option value="2">Hoàng Mai</option>
-                                        <option value="3">Đống Đa</option>
+                                        <option selected value="">Địa chỉ</option>
+                                        <option value="Hà Đông">Hà Đông</option>
+                                        <option value="Hoàng Mai">Hoàng Mai</option>
+                                        <option value="Đống Đa"> Đống Đa</option>
                                     </select>
 </div>
                                 
@@ -413,6 +424,7 @@ document.getElementById('display').innerHTML= str+
     })
     // loadListUser()
 }
+
 // function logout(){
 //     loadHome()
 // }
