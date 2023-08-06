@@ -58,8 +58,49 @@ function loadHome(){
                                 </div>
                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
                             </div>
-                            <button href="https://htmlcodex.com/hotel-html-template-pro" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Đơn Hàng      <i class="bi bi-cart-dash-fill"></i> <span id="cart-count">0</span></button>
+                            
+                            <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
                         </div>
+                         <div class="whole-cart-window " id="showCart">
+                             <h3>HomeStay</h3>
+                             <div class="cart-wrapper">
+                             <div class="cart-item">
+                             <img src="img/room-1.jpg">
+                             <div class="details">
+                             <h6>Căn hộ thương lưu</h6>
+                             
+                             <span class="quantity">Time:3 tháng</span>
+                             <span class="price">Giá: 600$</span>
+                             
+                           
+</div>
+                             <div class="cancel" ><i class="bi bi-x-square"></i></div>
+                             
+</div>
+<!--item2-->
+ <div class="cart-item">
+                             <img src="img/room-1.jpg">
+                             <div class="details">
+                             <h6>Căn hộ thương lưu</h6>
+                             
+                             <span class="quantity">Time:3 tháng</span>
+                             <span class="price">Giá: 600$</span>
+                             
+                           
+</div>
+                             <div class="cancel" ><i class="bi bi-x-square"></i></div>
+                             
+</div>
+<!--het item2-->
+</div>
+
+
+                             <div class="tong">Tổng tiền : 00$</div>
+                             <div class="checkout">Đăng xuất</div>
+                             <div class='donHang'>Đơn Hàng</div>
+                             
+                            
+                             </div>
                     </nav>
                 </div>
             </div>
