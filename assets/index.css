@@ -222,7 +222,7 @@ h3 {
 }
 .cart-item img{
     width: 100% ;
-    height: 80%;
+    height: 60%;
 }
 .cart-item .details{
     padding-left: 5%;
@@ -250,12 +250,11 @@ h3 {
 }
 .whole-cart-window{
 
-    margin-top: 500px;
+    margin-top: 510px;
     border: solid 1px black;
     width: 300px;
     position: absolute;
     background-color: darkorange;
-    margin-left: 650px;
-    z-index: 2
-
+    margin-left: 690px;
+    z-index: 2;
 }

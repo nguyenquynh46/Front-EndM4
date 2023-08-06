@@ -59,48 +59,58 @@ function loadHome(){
                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
                             </div>
                             
-                            <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
+                            <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard" style="width: 300px; ">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
                         </div>
-                         <div class="whole-cart-window " id="showCart">
-                             <h3>HomeStay</h3>
-                             <div class="cart-wrapper">
-                             <div class="cart-item">
-                             <img src="img/room-1.jpg">
-                             <div class="details">
-                             <h6>Căn hộ thương lưu</h6>
-                             
-                             <span class="quantity">Time:3 tháng</span>
-                             <span class="price">Giá: 600$</span>
-                             
+                        
+<div class="whole-cart-window " id="showCart"></div>
                            
-</div>
-                             <div class="cancel" ><i class="bi bi-x-square"></i></div>
-                             
-</div>
-<!--item2-->
- <div class="cart-item">
-                             <img src="img/room-1.jpg">
-                             <div class="details">
-                             <h6>Căn hộ thương lưu</h6>
-                             
-                             <span class="quantity">Time:3 tháng</span>
-                             <span class="price">Giá: 600$</span>
-                             
-                           
-</div>
-                             <div class="cancel" ><i class="bi bi-x-square"></i></div>
-                             
-</div>
-<!--het item2-->
-</div>
 
 
-                             <div class="tong">Tổng tiền : 00$</div>
-                             <div class="checkout">Đăng xuất</div>
-                             <div class='donHang'>Đơn Hàng</div>
-                             
-                            
-                             </div>
+
+<!--                         <div class="whole-cart-window " id="showCart">-->
+<!--                             <h3>HomeStay</h3>-->
+<!--                            -->
+<!--                             <div class="cart-wrapper" >-->
+<!--                            -->
+<!--                             <div class="cart-item">-->
+<!--                             <img src="img/room-1.jpg">-->
+<!--                             <div class="details">-->
+<!--                             <h6>Căn hộ thương lưu</h6>-->
+<!--                             -->
+<!--                             <span class="quantity">Time <input type="number" min="1" style="width: 40px"> tháng</span>-->
+<!--                             <span class="quantity">Giá: 00/tháng </span>-->
+<!--                             <span class="price">Tổng tiền:600$</span>-->
+<!--                             -->
+<!--                           -->
+<!--                            </div>-->
+<!--                             <div class="cancel" ><i class="bi bi-x-square"></i></div>-->
+<!--                             -->
+<!--                            </div>-->
+<!--&lt;!&ndash;item2&ndash;&gt;-->
+<!--                           <div class="cart-item">-->
+<!--                             <img src="img/room-1.jpg">-->
+<!--                             <div class="details">-->
+<!--                             <h6>Căn hộ thương lưu</h6>-->
+<!--                             -->
+<!--                             <span class="quantity">Time <input type="number" min="1" style="width: 40px"> tháng</span>-->
+<!--                             <span class="quantity">Giá: 00/tháng </span>-->
+<!--                             <span class="price">Tổng tiền:600$</span>-->
+<!--                             -->
+<!--                           -->
+<!--                              </div>-->
+<!--                             <div class="cancel" ><i class="bi bi-x-square"></i></div>-->
+<!--                             -->
+<!--                              </div>-->
+<!--&lt;!&ndash;het item2&ndash;&gt;-->
+<!--                             </div>-->
+
+
+<!--                             <div class="tong">Thanh toán : 00$</div>-->
+<!--                             <div class="checkout">Đăng xuất</div>-->
+<!--                             <div class='donHang'>Đơn Hàng</div>-->
+<!--                             -->
+<!--                            -->
+<!--                             </div>-->
                     </nav>
                 </div>
             </div>
@@ -285,7 +295,7 @@ function loadHome(){
   <div class="room-item shadow rounded overflow-hidden">
     <div class="position-relative">
       <img class="img-fluid" src="${data[i].image}" alt="">
-      <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$${data[i].price}/Tháng</small>
+      <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$<span>${data[i].price}</span>/Tháng</small>
     </div>
     <div class="p-4 mt-2">
       <div class="d-flex justify-content-between mb-3">
@@ -300,8 +310,8 @@ function loadHome(){
       </div>
       <div class="d-flex mb-3">
         <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>${data[i].address}</small>
-        <small><i class="fa fa-wifi text-primary me-2"></i>DT ${data[i].acreage} m2</small>
+        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2 " id="diachi1"> </i> <span>${data[i].address}</span></small>
+        <small><i class="fa fa-wifi text-primary me-2"></i> <span>DT ${data[i].acreage} m2</span></small>
       </div>
       <p class="text-body mb-3">${data[i].des}</p>
       <button class="btn btn-sm btn-primary rounded py-2 px-4" href="">${data[i].status}</button>
