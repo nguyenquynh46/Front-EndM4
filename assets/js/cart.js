@@ -1,11 +1,7 @@
 
+
 let cartCount = 0;
 let giohang= new Array();
-// import jwt_decode from 'jwt-decode';
-// const token = localStorage.getItem('token')
-// const payload = jwt_decode(token);
-// const role = payload.id
-
 
 function updateCartCount() {
   let cartCountElement = document.getElementById('cart-count');
@@ -112,5 +108,5 @@ function showgiohang_thanhtoan(){
         giohang[i].push(document.getElementById(`tongtien+${i}`).textContent)
     }
     console.log(giohang)
-
+    console.log(role,1111111)
 }
