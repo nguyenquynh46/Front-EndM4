@@ -258,3 +258,6 @@ h3 {
     margin-left: 690px;
     z-index: 2;
 }
+#hiddenSpan {
+    display: none;
+}

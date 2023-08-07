@@ -1,6 +1,11 @@
 
 let cartCount = 0;
 let giohang= new Array();
+// import jwt_decode from 'jwt-decode';
+// const token = localStorage.getItem('token')
+// const payload = jwt_decode(token);
+// const role = payload.id
+
 
 function updateCartCount() {
   let cartCountElement = document.getElementById('cart-count');
@@ -16,16 +21,15 @@ function themvaogiohang(button) {
   let tenNha = button.parentElement.parentElement.querySelector('h5').textContent;
   let anh=boxsp.querySelector('img').getAttribute('src');
   let elemet=boxsp.querySelectorAll('small span')
-
+let id=elemet[2].textContent
  let  diachi =elemet[1].textContent
   let gia=elemet[0].textContent;
-  let home=new Array(tenNha,anh,diachi,gia);
+  let home=new Array(tenNha,anh,diachi,gia,id);
     cartCount++;
     updateCartCount();
-  giohang.push(home)
-    console.log(giohang)
-
-
+  giohang.push(home);
+  //lưu giỏ hàng trên sesionstorage
+  //   sessionStorage.setItem("giohang",JSON.stringify(giohang))
 }
 
 
@@ -51,7 +55,7 @@ function showMyCart(){
 
 
                             </div>
-                             <div class="cancel" ><i class="bi bi-x-square"></i></div>
+                             <div class="cancel" ><i class="bi bi-x-square" onclick="xoa(${i})"></i></div>
 
                             </div>`
 
@@ -60,8 +64,8 @@ function showMyCart(){
         document.getElementById('showCart').innerHTML = str + `
                              </div>
                              <div class="tong" >Thanh toán : <span id="thanhtoan">0</span> $</div>
-                             <div class="checkout">Đăng xuất</div>
-                             <div class='donHang'>Đơn Hàng</div>`
+                             <div class="checkout" onclick="loadHome()">Đăng xuất</div>
+                             <div class='donHang' onclick="showgiohang_thanhtoan()" >Đơn Hàng</div>`
 
 
     }
@@ -79,8 +83,9 @@ function tinhtien(i){
    let thanhtoan=  parseInt  (document.getElementById('thanhtoan').textContent)
     console.log(thanhtoan)
     document.getElementById('thanhtoan').textContent=tong+thanhtoan-tongcu
-   //  tongthanhtoan+=tong+thanhtoan
-   //  document.getElementById('thanhtoan').textContent= tongthanhtoan
+
+
+    sessionStorage.setItem("giohang",JSON.stringify(giohang))
 
 }
 function showcart(){
@@ -91,4 +96,21 @@ function showcart(){
   }else {
     x.style.display='block'
   }
+}
+function xoa(i){
+    giohang.splice(i,1);
+    showMyCart();
+    cartCount--;
+    updateCartCount()
+}
+function showgiohang_thanhtoan(){
+
+    let gh=sessionStorage.getItem("giohang");
+    let giohang=JSON.parse(gh);
+    for (let i = 0; i < giohang.length; i++) {
+        giohang[i].push(document.getElementById( `thoigian+${i}`).value)
+        giohang[i].push(document.getElementById(`tongtien+${i}`).textContent)
+    }
+    console.log(giohang)
+
 }

@@ -1,5 +1,5 @@
-function loadLogin(){
-    let str=`
+function loadLogin() {
+    let str = `
        <div class ="row">
     <div class="col-md-6 mx-auto p-0">
         <div class="card">
@@ -22,7 +22,7 @@ function loadLogin(){
                                 <label for="check"><span class="icon"></span> Keep me Signed in</label>
                             </div>
                             <div class="group">
-                                <input type="submit" class="button" value="Sign In" onclick="checklogin()">
+                                <input type="submit" class="button" value="Sign In" onclick="checkLogin()">
                             </div>
                             <div class="hr"></div>
                             <div class="foot">
@@ -31,23 +31,23 @@ function loadLogin(){
                         </div>
                         <div class="sign-up-form">
                             <div class="group">
-                                <label for="user" class="label">Username</label>
-                                <input id="user1" type="text" class="input" placeholder="Create your Username">
+                                <label for="user" class="label">Nhap ten cua ban</label>
+                                <input id="name" type="text" class="input" placeholder="Input your username">
                             </div>
                             <div class="group">
-                                <label for="pass" class="label">Password</label>
-                                <input id="pass3" type="password" class="input" data-type="password" placeholder="Create your password">
+                                <label for="pass" class="label">Ten dang nhap</label>
+                                <input id="username" type="text" class="input" data-type="password" placeholder="Create your Username">
                             </div>
                             <div class="group">
-                                <label for="pass" class="label">Repeat Password</label>
-                                <input id="pass1" type="password" class="input" data-type="password" placeholder="Repeat your password" >
+                                <label for="pass" class="label">Nhap mat khau</label>
+                                <input id="password" type="text" class="input" data-type="password" placeholder="Create your Password" >
                             </div>
                             <div class="group">
-                                <label for="pass" class="label">Email Address</label>
-                                <input id="pass2" type="text" class="input" placeholder="Enter your email address">
+                                <label for="pass" class="label">Nhap dia chi email</label>
+<input id="email" type="text" class="input" placeholder="Enter your email address">
                             </div>
                             <div class="group">
-                                <input type="submit" class="button" value="Sign Up" onclick="loadLogin()">
+                                <input type="submit" class="button" value="Sign Up" onclick="save()">
                             </div>
                             <div class="hr"></div>
                             <div class="foot">
@@ -61,16 +61,77 @@ function loadLogin(){
     </div>
 </div>
         `
-    document.getElementById('display').innerHTML= str
+    document.getElementById('display').innerHTML = str
 }
 
-    function checklogin(){
-        alert('Ban da dang nhap thanh cong')
-        let x= +prompt('hãy điền vào một số')
-        if(x==1){
-            loadHomeUser()
-        }
-        else {
-            loadHomeAdmin()
+function checkLogin() {
+
+    const username = document.getElementById('user').value;
+    const password = document.getElementById('pass').value;
+    console.log(username,password)
+    LoginCheck(username, password)
+        .then((token) => {
+
+
+            if (token === "User is not exist" || token === "Password is wrong") {
+                alert('Đăng nhập không thành công');
+            } else {
+                // Lưu trữ token vào localStorage hoặc sessionStorage
+                localStorage.setItem('token', token);
+                // Hoặc sessionStorage.setItem('token', token);
+                if (username != "admin"){
+                    loadHomeUser();}
+                else {
+                    loadHomeAdmin()
+                }
+            }
+        })
+    // .catch((error) => {
+    //     console.error(error);
+    //     alert('Đăng nhập thất bại');
+    // });
+
+}
+async function LoginCheck(username, password) {
+    console.log(username,password)
+    try {
+        const response = await axios.post('http://localhost:3000/login', {
+            username: username,
+            password: password
+        });
+
+
+        const token = response.data;
+        let a = {username, password}
+
+        if (a === "User is not exist" || a === "Password is wrong") {
+            return alert("dang nhap ko thanh cong")
+
+        } else {
+            return token;
         }
     }
+    catch (error) {
+        console.error(error);
+        throw new Error('Error logging in');
+    }
+}
+
+
+function save() {
+    let data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value,
+    }
+    console.log(username)
+    if (data.username === "admin" ){
+        alert("b k dc quyen dat ten nay")
+    }else {
+        axios.post('http://localhost:3000/register',data).then(res => {
+            alert('dang ky thanh cong')
+            loadLogin()    })
+    }
+
+}

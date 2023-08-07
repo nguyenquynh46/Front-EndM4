@@ -47,16 +47,19 @@ function loadHome(){
                                 <button onclick="loadHome()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
 <button onclick="loadList()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
                                 <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">Tài Khoản</button>
+                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
+                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
                               
                                 <div class="nav-item dropdown">
                                     <button type="button" style="color: #F1F8FF ;background: #0F172B" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sắp Xếp </button>
                                     <div class="dropdown-menu rounded-0 m-0">
-                                        <button onclick="" class="dropdown-item">Tăng Dần </button>
+                                        <button onclick="" class="dropdown-item" oncl>Tăng Dần </button>
                                         <button onclick="" class="dropdown-item">Giảm Dần</button>
                                       
                                     </div>
                                 </div>
-                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
+                                 
+                                 
                             </div>
                             
                             <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard" style="width: 300px; ">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
@@ -301,7 +304,7 @@ function loadHome(){
       <div class="d-flex justify-content-between mb-3">
         <h5 class="mb-0">${data[i].name}</h5>
         <div class="ps-2">
-          <small class="fa fa-star text-primary"></small>
+          <small class="fa fa-star text-primary"><span id="hiddenSpan">${data[i].id}</span></small>
           <small class="fa fa-star text-primary"></small>
           <small class="fa fa-star text-primary"></small>
           <small class="fa fa-star text-primary"></small>
