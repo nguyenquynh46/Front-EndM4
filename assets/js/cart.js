@@ -111,24 +111,42 @@ function xoa(i) {
     document.getElementById('cart-count').textContent = cartCount
 }
 
-function showgiohang_thanhtoan() {
+async function showgiohang_thanhtoan() {
     const name = localStorage.getItem('name')
+    const id = localStorage.getItem('id')
     sessionStorage.setItem("giohang", JSON.stringify(giohang))
-    console.log(name)
-    if (name == null) {
+
+   if (name == null) {
         alert('Vui lòng đăng nhập để tạo đơn hàng')
+        loadHome()
     } else {
 
         let gh = sessionStorage.getItem("giohang");
         let giohang = JSON.parse(gh);
-
+       console.log(giohang)
 
         for (let i = 0; i < giohang.length; i++) {
             giohang[i].push(document.getElementById(`thoigian+${i}`).value)
             giohang[i].push(document.getElementById(`tongtien+${i}`).textContent)
+            let data = {
+                time: giohang[i][5],
+                price: giohang[i][6],
+                    user: { id: id },
+                home: { id: giohang[i][2] }
+
+            };
+            console.log(data)
+         await  axios.post("http://localhost:3000/orders", data)
+                .then(res => {
+
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
-        console.log(giohang)
+    await  showOrder()
+        }
 
 
-    }
+
 }

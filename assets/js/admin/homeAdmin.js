@@ -3,7 +3,7 @@ function loadHomeAdmin() {
     <button type="button" class="btn btn-primary" onclick="listProductAdmin()">Danh sách sản phẩm </button>
     <button type="button" class="btn btn-secondary" onclick="listUser1()">Danh sách người dùng</button>
     <button type="button" class="btn btn-success" onclick="listOrder1()">Danh sách đơn hàng</button>
-    <button type="button" class="btn btn-secondary" onclick="loadHome()">Đăng Xuất</button>
+    <button type="button" class="btn btn-secondary" onclick="logout()">Đăng Xuất</button>
     </div>
   `
     document.getElementById('display').innerHTML = str + `<div id="main"></div>`
@@ -89,8 +89,9 @@ function listOrder1(){
                         <td>${item.time}</td>
                         <td>
                         <button type="button" class="btn btn-danger" onclick="deleteOrder(${item.id})"> Xoá </button></td>
-                      
-                      </tr>`
+                     
+                    
+                     </tr>`
         })
         str += `</table> </div>`
         document.getElementById('main').innerHTML = str

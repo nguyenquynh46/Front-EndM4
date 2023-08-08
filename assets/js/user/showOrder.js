@@ -1,8 +1,8 @@
 
-function showOrder(){
+ async function showOrder(){
     const id = localStorage.getItem('id')
     const name = localStorage.getItem('name')
-    axios.get(`http://localhost:3000/orders/${id}`).then(res=>{
+  await axios.get(`http://localhost:3000/orders/${id}`).then(res=>{
         let str=` 
  <div class="container-xxl bg-white p-0">
 
@@ -87,20 +87,29 @@ function showOrder(){
   </thead>
   <tbody>`
         let data=res.data
-        for (let i = 0; i < data.length; i++) {
+       let i=1
+        data.map(item=>{
             str+= ` <tr>
-                <th scope="row">${i+1}</th>
-                <td>${data[i].home.name}</td>
-                <td><img src="${data[i].home.image}" style="width: 30px; height: 40px" alt=""></td>
-                <td>${data[i].home.price}</td>
-                <td>${data[i].time}</td>
-                <td>${data[i].price}</td> 
+                <th scope="row">${i++}</th>
+                <td>${item.home.name}</td>
+                <td><img src="${item.home.image}" style="width: 30px; height: 40px" alt=""></td>
+                <td>${item.home.price}</td>
+                <td>${item.time}</td>
+                <td>${item.price}</td> 
                 <td> <button type="button" class="btn btn-success">Chỉnh Sửa</button>
-                <button type="button" class="btn btn-danger">  Xoá  </button>
+                <button type="button" class="btn btn-danger" onclick="xoaOrder(${item.id})">  Xoá  </button>
                 </td> `
-        }
+        })
+
+
         document.getElementById('display').innerHTML=str+` </tbody>
 </table>
 </div></div>`
     })
+}
+function xoaOrder(id){
+    axios.delete(`http://localhost:3000/orders/${id}`).then(res=>{
+        showOrder()
+    })
+
 }

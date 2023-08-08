@@ -30,5 +30,6 @@ async function loadHomeUser() {
    }
 function logout(){
     localStorage.removeItem("name");
+    localStorage.removeItem("id");
     loadHome()
 }
