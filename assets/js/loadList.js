@@ -66,55 +66,8 @@ async function loadList(){
                             <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard" style="width: 300px; ">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
                         </div>
 
-<div class="whole-cart-window " id="showCart"></div>
+                     <div class="whole-cart-window " id="showCart"></div>
 
-
-
-
-<!--                         <div class="whole-cart-window " id="showCart">-->
-<!--                             <h3>HomeStay</h3>-->
-<!--                            -->
-<!--                             <div class="cart-wrapper" >-->
-<!--                            -->
-<!--                             <div class="cart-item">-->
-<!--                             <img src="img/room-1.jpg">-->
-<!--                             <div class="details">-->
-<!--                             <h6>Căn hộ thương lưu</h6>-->
-<!--                             -->
-<!--                             <span class="quantity">Time <input type="number" min="1" style="width: 40px"> tháng</span>-->
-<!--                             <span class="quantity">Giá: 00/tháng </span>-->
-<!--                             <span class="price">Tổng tiền:600$</span>-->
-<!--                             -->
-<!--                           -->
-<!--                            </div>-->
-<!--                             <div class="cancel" ><i class="bi bi-x-square"></i></div>-->
-<!--                             -->
-<!--                            </div>-->
-<!--&lt;!&ndash;item2&ndash;&gt;-->
-<!--                           <div class="cart-item">-->
-<!--                             <img src="img/room-1.jpg">-->
-<!--                             <div class="details">-->
-<!--                             <h6>Căn hộ thương lưu</h6>-->
-<!--                             -->
-<!--                             <span class="quantity">Time <input type="number" min="1" style="width: 40px"> tháng</span>-->
-<!--                             <span class="quantity">Giá: 00/tháng </span>-->
-<!--                             <span class="price">Tổng tiền:600$</span>-->
-<!--                             -->
-<!--                           -->
-<!--                              </div>-->
-<!--                             <div class="cancel" ><i class="bi bi-x-square"></i></div>-->
-<!--                             -->
-<!--                              </div>-->
-<!--&lt;!&ndash;het item2&ndash;&gt;-->
-<!--                             </div>-->
-
-
-<!--                             <div class="tong">Thanh toán : 00$</div>-->
-<!--                             <div class="checkout">Đăng xuất</div>-->
-<!--                             <div class='donHang'>Đơn Hàng</div>-->
-<!--                             -->
-<!--                            -->
-<!--                             </div>-->
                     </nav>
                 </div>
             </div>

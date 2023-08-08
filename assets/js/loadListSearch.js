@@ -1,5 +1,32 @@
+
 async function loadListSearch(){
-    const name = localStorage.getItem('name') == null ? "Tài Khoản": localStorage.getItem('name') ;
+    const name = localStorage.getItem('name') ;
+    if(name==null){
+       await loadSearch()
+    }
+    else {
+      await  loadSearch();
+        document.getElementById('home').innerHTML= `   <div class="navbar-nav mr-auto py-0" id="home">
+                                <button onclick="loadHomeUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
+                                <button onclick="listProductUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
+                                <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">${name}</button>
+                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
+                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="logout()">Đăng Xuất</button>
+                                <div class="nav-item dropdown">
+                                    <button type="button" style="color: #F1F8FF ;background: #0F172B" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sắp Xếp </button>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <button onclick="tangdannguoidung()" class="dropdown-item" >Tăng Dần </button>
+                                        <button onclick="giamdannguoidung()" class="dropdown-item">Giảm Dần</button>
+                                    </div>
+                                </div>
+
+
+                            </div>`
+    }
+}
+
+ async function loadSearch(){
+    // const name = localStorage.getItem('name') == null ? "Tài Khoản": localStorage.getItem('name') ;
     let data= {
         minPrice: document.getElementById('minPrice').value,
         maxPrice: document.getElementById('maxPrice').value,
@@ -9,7 +36,7 @@ async function loadListSearch(){
         address: document.getElementById('diachi').value
     }
 
-    await axios.get('http://localhost:3000/homes?'+'minPrice='+data.minPrice+'&maxPrice='+data.maxPrice +'&minAcreage='+data.minAcreage+'&maxAcreage='+data.maxAcreage+'&name='+data.name+'&address='+data.address).then(res=>{
+  await axios.get('http://localhost:3000/homes?'+'minPrice='+data.minPrice+'&maxPrice='+data.maxPrice +'&minAcreage='+data.minAcreage+'&maxAcreage='+data.maxAcreage+'&name='+data.name+'&address='+data.address).then(res=>{
 
         let str=`
       <div class="container-xxl bg-white p-0">
@@ -57,15 +84,15 @@ async function loadListSearch(){
 
                                 <button onclick="loadHome()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
                                 <button onclick="loadList()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
-                                <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">${name}</button>
+                                <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">Tài khoản</button>
                                  <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
 
                                 <div class="nav-item dropdown">
                                     <button type="button" style="color: #F1F8FF ;background: #0F172B" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sắp Xếp </button>
                                     <div class="dropdown-menu rounded-0 m-0">
-                                        <button onclick="" class="dropdown-item" oncl>Tăng Dần </button>
-                                        <button onclick="" class="dropdown-item">Giảm Dần</button>
+                                        <button onclick="tangdantrangchu()" class="dropdown-item" >Tăng Dần </button>
+                                        <button onclick="giamdantrangchu()" class="dropdown-item">Giảm Dần</button>
 
                                     </div>
                                 </div>
@@ -170,42 +197,40 @@ async function loadListSearch(){
         data.map(item=>{
             time+=0.2
             str+=`
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="${time}s">
-                        <div class="room-item shadow rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="${item.image}" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$${item.price}/Tháng</small>
-                            </div>
-                            <div class="p-4 mt-2">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">${item.name}</h5>
-                                    <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-<small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
-                                </div>
-                                <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>${item.address}</small>
-                                    <small><i class="fa fa-wifi text-primary me-2"></i>DT ${item.acreage} m2</small>
-                                </div>
-                                <p class="text-body mb-3">${item.des}</p>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Xem chi tiết</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Thuê Nhà</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp items" data-wow-delay="${time}s">
+  <div class="room-item shadow rounded overflow-hidden">
+    <div class="position-relative">
+      <img class="img-fluid" src="${item.image}" alt="">
+      <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$<span>${item.price}</span>/Tháng</small>
+    </div>
+    <div class="p-4 mt-2">
+      <div class="d-flex justify-content-between mb-3">
+        <h5 class="mb-0">${item.name}</h5>
+        <div class="ps-2">
+          <small class="fa fa-star text-primary"><span id="hiddenSpan">${item.id}</span></small>
+          <small class="fa fa-star text-primary"></small>
+          <small class="fa fa-star text-primary"></small>
+          <small class="fa fa-star text-primary"></small>
+          <small class="fa fa-star text-primary"></small>
+        </div>
+      </div>
+      <div class="d-flex mb-3">
+        <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
+        <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2 " id="diachi1"> </i> <span>${item.address}</span></small>
+        <small><i class="fa fa-wifi text-primary me-2"></i> <span>DT ${item.acreage} m2</span></small>
+      </div>
+      <p class="text-body mb-3">${item.des}</p>
+      <button class="btn btn-sm btn-primary rounded py-2 px-4" href="">Xem chi tiết</button>
+      <button class="btn btn-sm btn-dark rounded py-2 px-4 add" onclick="themvaogiohang(this)">Thuê Nhà</button>
+    </div>
+  </div>
+</div>
             `
         })
 
         document.getElementById('display').innerHTML= str+
             ` 
-
+                    
                 </div>
             </div>
         </div>
@@ -228,7 +253,7 @@ async function loadListSearch(){
             </div>
         </div>
         <!-- Newsletter Start -->
-
+        
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
@@ -238,8 +263,8 @@ async function loadListSearch(){
                         <div class="bg-primary rounded p-4">
                             <a href="index.html"><h1 class="text-white text-uppercase mb-3">Hotelier</h1></a>
                             <p class="text-white mb-0">
-                     <a class="text-dark fw-medium" href="https://htmlcodex.com/hotel-html-template-pro">Hotelier – Premium Version</a>, build a professional website for your hotel business and grab the attention of new visitors upon your site’s launch.
-                     </p>
+\t\t\t\t\t\t\t\tDownload <a class="text-dark fw-medium" href="https://htmlcodex.com/hotel-html-template-pro">Hotelier – Premium Version</a>, build a professional website for your hotel business and grab the attention of new visitors upon your site’s launch.
+\t\t\t\t\t\t\t</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
@@ -303,6 +328,7 @@ async function loadListSearch(){
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>`
+
 
     })
 

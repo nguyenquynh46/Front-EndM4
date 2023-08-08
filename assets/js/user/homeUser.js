@@ -27,10 +27,7 @@ async function loadHomeUser() {
 
 
                             </div>`
-    document.getElementById('timkiem').innerHTML=
-        `    <div class="col-md-2" id="timkiem">
-                            <button class="btn btn-primary w-100" onclick="loadListSearchUser()">Tìm kiếm</button>
-                        </div>`}
+   }
 function logout(){
     localStorage.removeItem("name");
     loadHome()
