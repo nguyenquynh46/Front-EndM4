@@ -2,7 +2,12 @@
  async function showOrder(){
     const id = localStorage.getItem('id')
     const name = localStorage.getItem('name')
-  await axios.get(`http://localhost:3000/orders/${id}`).then(res=>{
+     if (name == null) {
+         alert('Vui lòng đăng nhập để tạo đơn hàng')
+         loadHome()
+     } else {
+
+         await axios.get(`http://localhost:3000/orders/${id}`).then(res=>{
         let str=` 
  <div class="container-xxl bg-white p-0">
 
@@ -83,6 +88,7 @@
       <th scope="col">TG thuê</th>
       <th scope="col">Số tiền </th>
       <th scope="col"> </th>
+      <th scope="col"> </th>
     </tr>
   </thead>
   <tbody>`
@@ -96,9 +102,10 @@
                 <td>${item.home.price}</td>
                 <td>${item.time}</td>
                 <td>${item.price}</td> 
-                <td> <button type="button" class="btn btn-success">Chỉnh Sửa</button>
-                <button type="button" class="btn btn-danger" onclick="xoaOrder(${item.id})">  Xoá  </button>
-                </td> `
+                <td> <button type="button" class="btn btn-success" onclick="xacnhan()">Xác Nhận</button>
+        <button type="button" class="btn btn-danger" onclick="xoaOrder(${item.id})" >  Xoá  </button>
+        
+                 `
         })
 
 
@@ -106,10 +113,16 @@
 </table>
 </div></div>`
     })
-}
-function xoaOrder(id){
-    axios.delete(`http://localhost:3000/orders/${id}`).then(res=>{
+}}
+function xoaOrder(id) {
+     console.log(111111)
+    axios.delete(`http://localhost:3000/orders/${id}`).then(res => {
         showOrder()
     })
+ }
+
+function xacnhan(){
+    alert('Bạn đã lên đơn thành công')
+    showOrder()
 
 }
