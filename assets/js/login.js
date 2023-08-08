@@ -38,7 +38,7 @@ function loadLogin() {
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Ten dang nhap</label>
-                                <input id="username" type="text" class="input" data-type="password" placeholder="Create your Username">
+                                <input id="username" type="text" class="input" data-type="text" placeholder="Create your Username">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Nhap mat khau</label>
@@ -70,16 +70,16 @@ function checkLogin() {
 
     const username = document.getElementById('user').value;
     const password = document.getElementById('pass').value;
-    console.log(username,password)
+
     LoginCheck(username, password)
         .then((token) => {
-
-
+            console.log('quang anh than dang', token)
             if (token === "User is not exist" || token === "Password is wrong") {
                 alert('Đăng nhập không thành công');
             } else {
                 // Lưu trữ token vào localStorage hoặc sessionStorage
-                localStorage.setItem('token', token);
+                localStorage.setItem('id', token.idUser);
+                localStorage.setItem('name', token.username);
                 // Hoặc sessionStorage.setItem('token', token);
                 if (username != "admin"){
                     loadHomeUser();}
@@ -95,7 +95,6 @@ function checkLogin() {
 
 }
 async function LoginCheck(username, password) {
-    console.log(username,password)
     try {
         const response = await axios.post('http://localhost:3000/login', {
             username: username,

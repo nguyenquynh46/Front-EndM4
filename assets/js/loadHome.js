@@ -1,8 +1,12 @@
-function loadHome(){
-    axios.get('http://localhost:3000/homes').then(res=>{
 
 
-    let str=`   <div class="container-xxl bg-white p-0">
+async function loadHome(){
+    // localStorage.clear()
+
+    await axios.get('http://localhost:3000/homes').then(res=>{
+
+    let str=`   
+   <div class="container-xxl bg-white p-0">
 
         <!-- Header Start -->
         <div class="container-fluid bg-dark px-0">
@@ -43,30 +47,30 @@ function loadHome(){
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0" id="home">
-                            
+
                                 <button onclick="loadHome()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
 <button onclick="loadList()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
                                 <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">Tài Khoản</button>
                                  <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
-                              
+
                                 <div class="nav-item dropdown">
                                     <button type="button" style="color: #F1F8FF ;background: #0F172B" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sắp Xếp </button>
                                     <div class="dropdown-menu rounded-0 m-0">
-                                        <button onclick="" class="dropdown-item" oncl>Tăng Dần </button>
-                                        <button onclick="" class="dropdown-item">Giảm Dần</button>
-                                      
+                                        <button onclick="tangdantrangchu()" class="dropdown-item" >Tăng Dần </button>
+                                        <button onclick="giamdantrangchu()" class="dropdown-item">Giảm Dần</button>
+
                                     </div>
                                 </div>
-                                 
-                                 
+
+
                             </div>
-                            
+
                             <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard" style="width: 300px; ">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
                         </div>
-                        
+
 <div class="whole-cart-window " id="showCart"></div>
-                           
+
 
 
 
@@ -130,7 +134,7 @@ function loadHome(){
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">HomeStay </h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown"> Dịch vụ thuê nhà cao câp</h1>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown"> Dịch vụ thuê nhà cao cấp</h1>
                                 <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Căn hộ</a>
                                 <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Thuê Nhà</a>
                             </div>
@@ -140,10 +144,10 @@ function loadHome(){
                         <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-<h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+<h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">HomeStay</h6>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">Dịch vụ thuê nhà cao câp</h1>
+                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Căn hộ</a>
+                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Thuê Nhà</a>
                             </div>
                         </div>
                     </div>
@@ -174,8 +178,8 @@ function loadHome(){
                                  <div  data-target-input="nearest">
                                         <input id ='minPrice' type="text" class="form-control datetimepicker-input" placeholder=" Giá Thấp" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
-                                   
-                                   
+
+
                                 </div>
                                 <div class="col-md-2">
                                     <div  data-target-input="nearest">
@@ -205,10 +209,10 @@ function loadHome(){
                                         <option value="Đống Đa"> Đống Đa</option>
                                     </select>
 </div>
-                                
+
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" id="timkiem">
                             <button class="btn btn-primary w-100" onclick="loadListSearch()">Tìm kiếm</button>
                         </div>
                     </div>
@@ -317,15 +321,15 @@ function loadHome(){
         <small><i class="fa fa-wifi text-primary me-2"></i> <span>DT ${data[i].acreage} m2</span></small>
       </div>
       <p class="text-body mb-3">${data[i].des}</p>
-      <button class="btn btn-sm btn-primary rounded py-2 px-4" href="">${data[i].status}</button>
+      <button class="btn btn-sm btn-primary rounded py-2 px-4" href="">Xem chi tiết</button>
       <button class="btn btn-sm btn-dark rounded py-2 px-4 add" onclick="themvaogiohang(this)">Thuê Nhà</button>
     </div>
   </div>
 </div>
             `
         }
-  
-document.getElementById('display').innerHTML= str+ 
+
+document.getElementById('display').innerHTML= str+
                    `
                 </div>
             </div>
@@ -399,7 +403,7 @@ document.getElementById('display').innerHTML= str+
             </div>
         </div>
         <!-- Newsletter Start -->
-        
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s">
@@ -476,6 +480,7 @@ document.getElementById('display').innerHTML= str+
     </div>
 `
     })
+    // const token = localStorage.getItem('token')
     // loadListUser()
 }
 

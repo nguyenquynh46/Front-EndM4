@@ -1,6 +1,7 @@
-async function listProductUser(){
-   await loadList();
-    const name = localStorage.getItem('name')
+async function giamdannguoidung(){
+    await giamdantrangchu()
+    console.log(1111)
+    const name = localStorage.getItem('name');
     document.getElementById('home').innerHTML= `   <div class="navbar-nav mr-auto py-0" id="home">
 
                                 <button onclick="loadHomeUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
@@ -20,5 +21,7 @@ async function listProductUser(){
 
 
                             </div>`
+    document.getElementById('timkiem2').innerHTML=
+        `   <button class="btn btn-primary w-100" onclick="loadListSearchUser()" >Tìm kiếm</button>`
 
 }

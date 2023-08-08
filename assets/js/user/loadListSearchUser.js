@@ -1,10 +1,12 @@
-async function listProductUser(){
-   await loadList();
+async function loadListSearchUser(){
+    await loadListSearch()
     const name = localStorage.getItem('name')
-    document.getElementById('home').innerHTML= `   <div class="navbar-nav mr-auto py-0" id="home">
+
+    document.getElementById('home').innerHTML=` 
+         <div class="navbar-nav mr-auto py-0" id="home">
 
                                 <button onclick="loadHomeUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
-<button onclick="listProductUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
+<button onclick="loadListUser()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
                                 <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">${name}</button>
                                  <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="logout()">Đăng Xuất</button>

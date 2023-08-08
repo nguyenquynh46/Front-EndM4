@@ -1,5 +1,5 @@
-function loadListSearch(){
-
+async function loadListSearch(){
+    const name = localStorage.getItem('name') == null ? "Tài Khoản": localStorage.getItem('name') ;
     let data= {
         minPrice: document.getElementById('minPrice').value,
         maxPrice: document.getElementById('maxPrice').value,
@@ -8,19 +8,19 @@ function loadListSearch(){
         name: document.getElementById('nameHome').value,
         address: document.getElementById('diachi').value
     }
-    console.log('http://localhost:3000/homes?'+'minPrice='+data.minPrice+'&maxPrice='+data.maxPrice +'minAcreage='+data.minAcreage+'maxAcreage='+data.maxAcreage+'name='+data.name+'address='+data.address)
 
-    axios.get('http://localhost:3000/homes?'+'minPrice='+data.minPrice+'&maxPrice='+data.maxPrice +'&minAcreage='+data.minAcreage+'&maxAcreage='+data.maxAcreage+'&name='+data.name+'&address='+data.address).then(res=>{
+    await axios.get('http://localhost:3000/homes?'+'minPrice='+data.minPrice+'&maxPrice='+data.maxPrice +'&minAcreage='+data.minAcreage+'&maxAcreage='+data.maxAcreage+'&name='+data.name+'&address='+data.address).then(res=>{
 
-        let str=`<div class="container-xxl bg-white p-0">
-
+        let str=`
+      <div class="container-xxl bg-white p-0">
+       
 
         <!-- Header Start -->
         <div class="container-fluid bg-dark px-0">
             <div class="row gx-0">
                 <div class="col-lg-3 bg-dark d-none d-lg-block">
                     <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                        <h1 class="m-0 text-primary text-uppercase">Hotelier</h1>
+                        <h1 class="m-0 text-primary text-uppercase">HomeStay</h1>
                     </a>
                 </div>
                 <div class="col-lg-9">
@@ -47,7 +47,7 @@ function loadListSearch(){
                     </div>
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                         <a href="index.html" class="navbar-brand d-block d-lg-none">
-                            <h1 class="m-0 text-primary text-uppercase">Hotelier</h1>
+                            <h1 class="m-0 text-primary text-uppercase">HomeStay</h1>
                         </a>
                         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
@@ -55,35 +55,45 @@ function loadListSearch(){
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0" id="home">
 
-                               <button onclick="loadHome()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
-
+                                <button onclick="loadHome()" type="button" style="color: #F1F8FF ;background: #0F172B" >Trang Chủ</button>
                                 <button onclick="loadList()" type="button" style="color: #F1F8FF ;background: #0F172B" >Sản Phẩm </button>
-                                <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B" ><span id="tai khoan">Tài Khoản</span></button>
+                                <button onclick=""  type="button" style="color: #F1F8FF ;background: #0F172B">${name}</button>
+                                 <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="showOrder()">Giỏ Hàng</button>
+                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadLogin()">Đăng Nhập</button>
 
                                 <div class="nav-item dropdown">
                                     <button type="button" style="color: #F1F8FF ;background: #0F172B" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sắp Xếp </button>
                                     <div class="dropdown-menu rounded-0 m-0">
-                                        <button onclick="" class="dropdown-item">Tăng Dần </button>
+                                        <button onclick="" class="dropdown-item" oncl>Tăng Dần </button>
                                         <button onclick="" class="dropdown-item">Giảm Dần</button>
 
                                     </div>
                                 </div>
-                                <button type="button" style="color: #F1F8FF ;background: #0F172B" onclick="loadHome()">Đăng Nhập</button>
+
+
                             </div>
-                            <a href="https://htmlcodex.com/hotel-html-template-pro" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Đơn Hàng      <i class="bi bi-cart-dash-fill"></i></a>
+
+                            <button onclick="showcart()" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block showCard" style="width: 300px; ">Đơn Hàng      <i class="bi bi-cart-dash-fill fa-2x"></i> <span class="soluong" id="cart-count">0</span></button>
                         </div>
+
+<div class="whole-cart-window " id="showCart"></div>
+
+
+
+
                     </nav>
                 </div>
             </div>
-        </div> <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
+        </div>
+         <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
             <div class="container-fluid page-header-inner py-5">
                 <div class="container text-center pb-5">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Rooms</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Danh Sách Căn Hộ</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Rooms</li>
+                            <li class="breadcrumb-item"><a href="#">Trang Chủ</a></li>
+                            <li class="breadcrumb-item"><a href="#">Sản Phẩm</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Căn Hộ</li>
                         </ol>
                     </nav>
                 </div>
@@ -93,43 +103,52 @@ function loadListSearch(){
 
 
         <!-- Booking Start -->
-        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+       <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="bg-white shadow" style="padding: 35px;">
                     <div class="row g-2">
                         <div class="col-md-10">
                             <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
+                                <div class="col-md-2">
+                                 <div  data-target-input="nearest">
+                                        <input id ='minPrice' type="text" class="form-control datetimepicker-input" placeholder=" Giá Thấp" data-target="#date2" data-toggle="datetimepicker"/>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-2">
+                                    <div  data-target-input="nearest">
+                                        <input id ='maxPrice' type="text" class="form-control datetimepicker-input" placeholder=" Giá Cao" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
+                                 <div class="col-md-2">
+                                    <div  data-target-input="nearest">
+                                        <input  id = 'mindt' type="text" class="form-control datetimepicker-input" placeholder="Diện tích nhỏ" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
-                                    </select>
+                                 <div class="col-md-2">
+                                    <div data-target-input="nearest">
+                                        <input  id = 'maxdt' type="text" class="form-control datetimepicker-input" placeholder="Diện tích lớn" data-target="#date2" data-toggle="datetimepicker"/>
+                                    </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
-                                    </select>
+                                 <div class="col-md-2">
+                                    <div  data-target-input="nearest">
+                                        <input  id = 'nameHome' type="text" class="form-control datetimepicker-input" placeholder="Tên Căn Hộ" data-target="#date2" data-toggle="datetimepicker"/>
+                                    </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <select class="form-select" id="diachi">
+                                        <option selected value="">Địa chỉ</option>
+                                        <option value="Hà Đông">Hà Đông</option>
+                                        <option value="Hoàng Mai">Hoàng Mai</option>
+                                        <option value="Đống Đa"> Đống Đa</option>
+                                    </select>
+</div>
+
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">Submit</button>
+                        <div class="col-md-2" id="timkiem4">
+                            <button class="btn btn-primary w-100" onclick="loadListSearch()" >Tìm kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -142,8 +161,8 @@ function loadListSearch(){
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="section-title text-center text-primary text-uppercase">Our Rooms</h6>
-                    <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Rooms</span></h1>
+                    <h6 class="section-title text-center text-primary text-uppercase">Dịch vụ của chúng tôi</h6>
+                    <h1 class="mb-5">Danh Sách <span class="text-primary text-uppercase">Căn Hộ</span></h1>
                 </div>
                 <div class="row g-4">`
         let data= res.data
@@ -219,8 +238,8 @@ function loadListSearch(){
                         <div class="bg-primary rounded p-4">
                             <a href="index.html"><h1 class="text-white text-uppercase mb-3">Hotelier</h1></a>
                             <p class="text-white mb-0">
-\t\t\t\t\t\t\t\tDownload <a class="text-dark fw-medium" href="https://htmlcodex.com/hotel-html-template-pro">Hotelier – Premium Version</a>, build a professional website for your hotel business and grab the attention of new visitors upon your site’s launch.
-\t\t\t\t\t\t\t</p>
+                     <a class="text-dark fw-medium" href="https://htmlcodex.com/hotel-html-template-pro">Hotelier – Premium Version</a>, build a professional website for your hotel business and grab the attention of new visitors upon your site’s launch.
+                     </p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
