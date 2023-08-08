@@ -9,7 +9,7 @@ function listOrder(){
       <th scope="col">Handle1
       
      </th>
-     <th> <button >   Chức Năng    </button></th>
+     <th> <button >     </button></th>
     
       </tr>
   </thead>

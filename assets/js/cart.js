@@ -1,13 +1,13 @@
-// let cartCount = 0;
-let cartCount = document.getElementById('cart-count').textContent
+let cartCount = 0;
+ document.getElementById('cart-count').textContent=cartCount
 let giohang = new Array();
 
-function updateCartCount() {
-    let cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
-        cartCountElement.textContent = cartCount;
-    }
-}
+// function updateCartCount() {
+//     let cartCountElement = document.getElementById('cart-count');
+//     if (cartCountElement) {
+//         cartCountElement.textContent = cartCount;
+//     }
+// }
 
 function themvaogiohang(button) {
 
@@ -21,12 +21,14 @@ function themvaogiohang(button) {
     let gia = elemet[0].textContent;
     let home = new Array(tenNha, anh, diachi, gia, id);
     cartCount++;
-    updateCartCount();
+    // updateCartCount();
     giohang.push(home);
     //lưu giỏ hàng trên sesionstorage
+    // sessionStorage.setItem("giohang1", JSON.stringify(giohang))
+    // let gh = JSON.parse(sessionStorage.getItem("giohang1"));
+    // console.log(gh.length)
 
-
-    document.getElementById('cart-count').textContent = giohang.length
+    document.getElementById('cart-count').textContent = cartCount
 }
 
 
@@ -83,11 +85,11 @@ function tinhtien(i) {
     document.getElementById(`tongtien+${i}`).textContent = tong
 
     let thanhtoan = parseInt(document.getElementById('thanhtoan').textContent)
-    console.log(thanhtoan)
+
     document.getElementById('thanhtoan').textContent = tong + thanhtoan - tongcu
 
 
-    sessionStorage.setItem("giohang", JSON.stringify(giohang))
+    // sessionStorage.setItem("giohang", JSON.stringify(giohang))
 
 
 }
@@ -106,11 +108,12 @@ function xoa(i) {
     giohang.splice(i, 1);
     showMyCart();
     cartCount--;
-    updateCartCount()
+    document.getElementById('cart-count').textContent = cartCount
 }
 
 function showgiohang_thanhtoan() {
     const name = localStorage.getItem('name')
+    sessionStorage.setItem("giohang", JSON.stringify(giohang))
     console.log(name)
     if (name == null) {
         alert('Vui lòng đăng nhập để tạo đơn hàng')
@@ -119,10 +122,12 @@ function showgiohang_thanhtoan() {
         let gh = sessionStorage.getItem("giohang");
         let giohang = JSON.parse(gh);
 
+
         for (let i = 0; i < giohang.length; i++) {
             giohang[i].push(document.getElementById(`thoigian+${i}`).value)
             giohang[i].push(document.getElementById(`tongtien+${i}`).textContent)
         }
+        console.log(giohang)
 
 
     }

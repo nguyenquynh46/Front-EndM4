@@ -23,14 +23,15 @@ function loadHomeAdmin() {
 function listUser1(){
     axios.get("http://localhost:3000").then(res=>{
         let data = res.data
-        let str = `<table class="table table-striped">
+        let str = `<div class="container-fluid"> 
+<table class="table table-striped">
                                <thead>
                                    <tr>
-                                   <th scope="col">id người dùng</th>
+                                   <th scope="col">STT</th>
                                    <th scope="col">Tên người dùng</th>
                                    <th scope="col">Email</th>
                                    <th scope="col">Tên đăng nhập</th>
-                                   <th scope="col">Handle1</th>  
+                                   <th scope="col"></th>  
                                    <th>                   
                                    </tr>
                                </thead>`
@@ -43,47 +44,25 @@ function listUser1(){
                         <td>${item.email}</td>
                         <td>${item.username}</td>
                         <td>
-                        <button type="button" class="btn btn-danger" onclick="deleteUser(${item.id})">Delete</button></td>
+                        <button type="button" class="btn btn-danger" onclick="deleteUser(${item.id})">Xoá</button></td>
                        </tr>`
         })
-        str += `</table>`
+        str += `</table> </div>`
         document.getElementById('main').innerHTML = str
     })
 }
 function deleteUser(id){
-    axios.delete(`http://localhost:3000/${id}`).then(res=>{
-        let data = res.data
-        let str = `<table class="table table-striped">
-                               <thead>
-                                   <tr>
-                                   <th scope="col">id người dùng</th>
-                                   <th scope="col">Tên người dùng</th>
-                                   <th scope="col">Email</th>
-                                   <th scope="col">Tên đăng nhập</th>
-                                   <th scope="col">Handle1</th>  
-                                   <th>                          
-                                   </tr>
-</thead>`
-        data.map(item=>{
-            str += `<tbody>
-                       <tr>
-                        <th scope="row">${item.id}</th>
-                        <td>${item.name}</td>
-                        <td>${item.email}</td>
-                        <td>${item.username}</td>
-                        <td>
-                        <button type="button" class="btn btn-danger" onclick="deleteUser(${item.id})">Delete</button></td>
-                       </tr>`
-        })
-        str += `</table>`
-        document.getElementById('main').innerHTML = str
+    axios.delete(`http://localhost:3000/${id}`).then(res=> {
+        listUser1()
     })
 }
 function listOrder1(){
     axios.get("http://localhost:3000/orders").then(res=>{
         let data = res.data
         console.log(data,1)
-        let str = `<table class="table table-striped">
+
+        let str = `
+<div class="container-fluid"><table class="table table-striped">
                                <thead>
                                    <tr>
                                    <th scope="col">MDH</th>
@@ -93,8 +72,8 @@ function listOrder1(){
                                    <th scope="col">Địa chỉ</th>
                                    <th scope="col">Diện tích</th>
                                    <th scope="col">Giá</th>  
-                                   <th scope="col">Thời gian thuê</th>  
-                                   <th colspan="2" style="text-align: center"><button type="button" class="btn btn-secondary" >Chức năng</button></td>                   
+                                   <th scope="col">TG thuê</th>  
+                                   <th colspan="2" style="text-align: center"></td>                   
                                    </tr>
                                </thead>`
         data.map(item=>{
@@ -109,12 +88,11 @@ function listOrder1(){
                         <td>${item.price}</td>
                         <td>${item.time}</td>
                         <td>
-                        <button type="button" class="btn btn-danger" onclick="deleteOrder(${item.id})">Delete</button></td>
-                        <td>
-                        <button type="button" class="btn btn-success" onclick="showFormAddOrder()">Add</button></td>
-                       </tr>`
+                        <button type="button" class="btn btn-danger" onclick="deleteOrder(${item.id})"> Xoá </button></td>
+                      
+                      </tr>`
         })
-        str += `</table>`
+        str += `</table> </div>`
         document.getElementById('main').innerHTML = str
     })
 }
