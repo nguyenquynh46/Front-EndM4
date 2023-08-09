@@ -64,7 +64,7 @@ function showMyCart() {
                              </div>
                              <div class="tong" >Thanh toán : <span id="thanhtoan">0</span> $</div>
                              <div style="padding: 10px">
-                             <div class="checkout" onclick="loadHome()">Đăng xuất</div>
+                             <div class="checkout" onclick="logout()">Đăng xuất</div>
                              <div class='donHang' onclick="showgiohang_thanhtoan()" >Đơn Hàng</div>
                              </div>                            
 `
